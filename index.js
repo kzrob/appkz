@@ -1,65 +1,71 @@
-var black = "#000000"
-var white = "#FFFFFF"
-var accent = "#0A81D1"
-var shade = "#314CB6"
+function createGrid(parent) {
+    let div = document.createElement("div")
+        div.style.border = "solid"
+        div.style.borderWidth = "1px"
+        div.style.width = "512px"
+        div.style.height = "512px"
+        div.style.marginLeft = "auto"
+        div.style.marginRight = "auto"
+        div.style.display = "flex"
+        div.style.flexDirection = "row"
+        div.style.flexWrap = "wrap"
 
-var grid = null
-function createGrid(gridSize) {
-    //Delete grid in order to update grid size
-    if (grid != null) {
-        grid.remove()
-        grid = null
-    }
-
-    //Create the drawing board
-    grid = document.createElement("div")
-    grid.style.border = "solid"
-    grid.style.borderWidth = "1px"
-    grid.style.width = "512px"
-    grid.style.height = "512px"
-    grid.style.marginLeft = "auto"
-    grid.style.marginRight = "auto"
-    grid.style.display = "flex"
-    grid.style.flexDirection = "row"
-    grid.style.flexWrap = "wrap"
-    document.body.appendChild(grid)
-
-    //Create each column
-    for (let i=0; i<gridSize; i++) {
-        let column = document.createElement("div")
-        column.style.backgroundColor = "#FFFFFF"
-        column.style.display = "flex"
-        column.style.flexDirection = "column"
-        column.style.flex = 1
-        column.style.flexWrap = "wrap"
-        grid.appendChild(column)
-
-        //Create each row
-        for (let i=0; i<gridSize; i++) {
-            let row = document.createElement("div")
-            row.style.backgroundColor = "#FFFFFF"
-            row.style.border = "solid"
-            row.style.borderWidth = "1px"
-            row.style.flexBasis = "100%"
-            row.style.flex = 1
-            row.addEventListener("mouseover", () => {
-                row.style.backgroundColor = "#000000"
-            })
-            column.appendChild(row)
-        }
-    }
+    if (parent) {parent.appendChild(div)}
+    return div
 }
+
+function createColumn(parent) {
+    let div = document.createElement("div")
+        div.style.backgroundColor = "#FFFFFF"
+        div.style.display = "flex"
+        div.style.flexDirection = "column"
+        div.style.flex = 1
+        div.style.flexWrap = "wrap"
+
+    if (parent) {parent.appendChild(div)}
+    return div
+}
+
+function createRow(parent, text) {
+    let button = document.createElement("button")
+        button.width = "100%"
+        button.height = "100%"
+        button.style.border = "solid"
+        button.style.borderWidth = "1px"
+        button.style.borderRadius = "16px"
+        button.style.flexBasis = "100%"
+        button.style.flex = 1
+        button.textContent = text
+
+    if (parent) {parent.appendChild(button)}
+    return button
+}
+
+const grid = createGrid(document.body)
+    const col1 = createColumn(grid)
+        const row1 = createRow(col1)
+        const row2 = createRow(col1)
+        const row3 = createRow(col1)
+        const row4 = createRow(col1)
+
+        row4.addEventListener("click", () => {
+            console.log("addition")
+        })
+
+    const col2 = createColumn(grid)
+    const col3 = createColumn(grid)
+    const col4 = createColumn(grid)
 
 const topbar = document.createElement("div")
 topbar.style.width = "100%"
 topbar.style.float = "left"
-topbar.style.backgroundColor = accent
+topbar.style.backgroundColor = "#222299"
 
 const main = document.createElement("main")
 
 const title = document.createElement("h1")
 title.textContent = "Calculator"
-title.style.color = white
+title.style.color = "#FFFFFF"
 title.style.textShadow = "4px 4px #000000"
 title.style.textAlign = "center"
 
@@ -71,24 +77,9 @@ inputDiv.style.textAlign = "center"
 inputDiv.style.padding = "16px"
 
 const input = document.createElement("input")
-input.style. = "100%"
+input.style.width = "100%"
 input.style.height = "100%"
 input.type = "text"
-
-function createButton(text) {
-    let button = document.createElement("button")
-    button.textContent = text
-    return button
-}
-
-const gridSizeBtn = createButton("Set Grid Size")
-gridSizeBtn.addEventListener("click", () => {
-    let newGridSize = prompt("Set the new grid size to: (number range: 1-100)", "16")
-    if (newGridSize == null) {return}
-    if (newGridSize < 1) {newGridSize = 1}
-    if (newGridSize > 100) {newGridSize = 100}
-    createGrid(newGridSize)
-})
 
 document.body.appendChild(topbar)
 topbar.appendChild(main)
