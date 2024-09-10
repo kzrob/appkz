@@ -64,6 +64,8 @@ const grid = createGrid(document.body)
 
 const inputrow = createRow(grid)
 
+//TODO - this should not be an input element, and instead just a text label
+//       to add typing, create keybind functions that do what pressing buttons do
 const input = document.createElement("input")
 input.type = "number"
 input.inputMode = "numeric"
