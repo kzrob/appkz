@@ -16,13 +16,14 @@ main.appendChild(title)
 
 function createGrid(parent) {
     let div = document.createElement("div")
-    div.style.border = "solid"
-    div.style.borderWidth = "1px"
+    div.style.backgroundColor = "rgb(200,200,200)"
+    div.style.outline = "1px solid black"
+    div.style.borderRadius = "8px"
     div.style.width = "512px"
     div.style.height = "640px"
+    div.style.padding = "16px"
     div.style.marginLeft = "auto"
     div.style.marginRight = "auto"
-    div.style.padding = "4px"
     div.style.display = "flex"
     div.style.flexDirection = "column"
     div.style.flexWrap = "wrap"
@@ -35,7 +36,6 @@ function createRow(parent) {
     let div = document.createElement("div")
     div.style.backgroundColor = "#FFFFFF"
     div.style.display = "flex"
-    div.style.padding = "4px"
     div.style.flexDirection = "row"
     div.style.flex = 1
     div.style.flexWrap = "wrap"
@@ -46,13 +46,12 @@ function createRow(parent) {
 
 function createButton(parent, text) {
     let button = document.createElement("button")
-    button.width = "100%"
-    button.height = "100%"
     button.style.backgroundColor = "rgb(40,40,40)"
     button.style.color = "rgb(100,100,200)"
     button.style.fontSize = "60px"
+    button.style.margin = "12px"
     button.style.borderWidth = "0px"
-    button.style.borderRadius = "100%"
+    button.style.borderRadius = "32px"
     button.style.flex = 1
     button.textContent = text
     
@@ -63,41 +62,36 @@ function createButton(parent, text) {
 const grid = createGrid(document.body)
 
 const inputrow = createRow(grid)
-
-//TODO - this should not be an input element, and instead just a text label
-//       to add typing, create keybind functions that do what pressing buttons do
 const input = document.createElement("input")
-input.type = "number"
-input.inputMode = "numeric"
+input.readOnly = "true"
 input.style.backgroundColor = "rgb(50,50,50)"
 input.style.color = "rgb(255,255,255)"
 input.style.textAlign = "right"
 input.style.fontSize = "60px"
 input.style.width = "100%"
 input.style.height = "100%"
-input.style.borderRadius = "20px"
 inputrow.appendChild(input)
 
 const col1 = createRow(grid)
-const row11 = createButton(col1, "7")
-const row12 = createButton(col1, "8")
-const row13 = createButton(col1, "9")
-const row14 = createButton(col1, "/")
+const btn7 = createButton(col1, "7")
+const btn8 = createButton(col1, "8")
+const btn9 = createButton(col1, "9")
+const btnDiv = createButton(col1, "÷")
 const col2 = createRow(grid)
-const row21 = createButton(col2, "4")
-const row22 = createButton(col2, "5")
-const row23 = createButton(col2, "6")
-const row24 = createButton(col2, "*")
+const btn4 = createButton(col2, "4")
+const btn5 = createButton(col2, "5")
+const btn6 = createButton(col2, "6")
+const btnMul = createButton(col2, "×")
 const col3 = createRow(grid)
-const row31 = createButton(col3, "1")
-const row32 = createButton(col3, "2")
-const row33 = createButton(col3, "3")
-const row34 = createButton(col3, "-")
+const btn1 = createButton(col3, "1")
+const btn2 = createButton(col3, "2")
+const btn3 = createButton(col3, "3")
+const btnMin = createButton(col3, "−")
 const col4 = createRow(grid)
-const row41 = createButton(col4, ".")
-const row42 = createButton(col4, "0")
-const row43 = createButton(col4, "=")
-const row44 = createButton(col4, "+")
+const btnDot = createButton(col4, ".")
+const btn0 = createButton(col4, "0")
+const btnEqa = createButton(col4, "=")
+const btnAdd = createButton(col4, "+")
 
 
 /*
@@ -113,64 +107,84 @@ termSeq[1] = result
 TODO: figure out a way to properly code calculator operations after analyzing Odin: Object Basics
 ---------------------
 */
-var termSeq = [null, null]
-var operSeq = [null]
-
-
-var term1 = ""
+var term1 = null
+var term2 = null
 
 //numbers (row y,x)
-row42.addEventListener("click", () => {
-    term1 = term1 + "0"
-    input.value = term1
+btn0.addEventListener("click", () => {
+    input.value += "0"
 })
-row31.addEventListener("click", () => {
-    term1 = term1 + "1"
-    input.value = term1
+btn1.addEventListener("click", () => {
+    input.value += "1"
 })
-row32.addEventListener("click", () => {
-    term1 = term1 + "2"
-    input.value = term1
+btn2.addEventListener("click", () => {
+    input.value += "2"
 })
-row33.addEventListener("click", () => {
-    term1 = term1 + "3"
-    input.value = term1
+btn3.addEventListener("click", () => {
+    input.value += "3"
 })
-row21.addEventListener("click", () => {
-    term1 = term1 + "4"
-    input.value = term1
+btn4.addEventListener("click", () => {
+    input.value += "4"
 })
-row22.addEventListener("click", () => {
-    term1 = term1 + "5"
-    input.value = term1
+btn5.addEventListener("click", () => {
+    input.value += "5"
 })
-row23.addEventListener("click", () => {
-    term1 = term1 + "6"
-    input.value = term1
+btn6.addEventListener("click", () => {
+    input.value += "6"
 })
-row11.addEventListener("click", () => {
-    term1 = term1 + "7"
-    input.value = term1
+btn7.addEventListener("click", () => {
+    input.value += "7"
 })
-row12.addEventListener("click", () => {
-    term1 = term1 + "8"
-    input.value = term1
+btn8.addEventListener("click", () => {
+    input.value += "8"
 })
-row13.addEventListener("click", () => {
-    term1 = term1 + "9"
-    input.value = term1
+btn9.addEventListener("click", () => {
+    input.value += "9"
+})
+btnDot.addEventListener("click", () => {
+    input.value += "."
 })
 
+function operator() {
+    if (term1 == null) {
+        term1 = Number(input.value)
+    }
+    else {
+        term2 = Number(input.value.substring(1))
+
+        if (input.value.substring(0, 1) == "+") {
+            term1 = term1 + term2
+        }
+        else if (input.value.substring(0, 1) == "−") {
+            term1 = term1 - term2
+        }
+        else if (input.value.substring(0, 1) == "×") {
+            term1 = term1 * term2
+        }
+        else if (input.value.substring(0, 1) == "÷") {
+            term1 = term1 / term2
+        }
+
+
+        return term1 + term2
+        term1 = null
+        term2 = null
+    }
+}
+
 //operators
-row44.addEventListener("click", () => {
-    input.value = input.value + "+"
+btnAdd.addEventListener("click", () => {
+    input.value = "+"
 })
-row34.addEventListener("click", () => {
-    input.value = input.value + "-"
+btnMin.addEventListener("click", () => {
+    input.value = "−"
 })
-row24.addEventListener("click", () => {
-    input.value = input.value + "*"
+btnMul.addEventListener("click", () => {
+    input.value = "×"
 })
-row14.addEventListener("click", () => {
-    input.value = input.value + "/"
+btnDiv.addEventListener("click", () => {
+    input.value = "÷"
+})
+btnEqa.addEventListener("click", () => {
+    input.value = "="
 })
