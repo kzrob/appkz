@@ -1,13 +1,42 @@
+:root {
+    --bg: rgb(0,0,10);
+    --button-bg: rgb(23, 23, 62);
+    --num-color: rgb(100,100,200);
+    --op-color: rgb(150,200,200);
+}
+
+/*
 * {
     outline: 2px solid red;
 }
+*/
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+body {
+    background-color: var(--bg);
+    height: 100vh;
     margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-input[type=number]{
-    -moz-appearance: textfield;
+#calc {
+    width: 50vw;
+    height: 60vh;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.numButton {
+    background-color: var(--button-bg);
+    border-color: var(--num-color);
+    color: var(--num-color)
+}
+
+.opButton {
+    background-color: var(--button-bg);
+    border-color: var(--op-color);
+    color: var(--op-color)
 }
