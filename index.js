@@ -1,6 +1,5 @@
 const calc = document.getElementById("calc")
 
-const buttons = []
 const buttonMap = [
     ["7", "8", "9", "/"],
     ["4", "5", "6", "*"],
@@ -19,16 +18,18 @@ const input = document.createElement("input")
 input.className = "inputBox"
 input.readOnly = "true"
 
-const row = []
-row["input"] = createRow(calc)
-row["input"].appendChild(input)
+const rows = []
+rows["input"] = createRow(calc)
+rows["input"].appendChild(input)
 
 //create all the buttons
-for (let i=1; i<=buttonMap.length; i++) {
-    row[i] = createRow(calc)
+const buttons = []
+for (let row=1; row<=buttonMap.length; row++) {
+    rows[row] = createRow(calc)
     
-    for (let col=0; col<=buttonMap[i-1].length-1; col++) {
-        createButton(row[i], buttonMap[i-1][col])
+    for (let i=0; i<=buttonMap[row-1].length-1; i++) {
+        let buttonId = buttonMap[row-1][i]
+        buttons[buttonId] = createButton(rows[row], buttonId)
     }
 }
 
@@ -56,10 +57,10 @@ function createRow(parent) {
     return div
 }
 function createButton(parent, text) {
-    buttons[text] = document.createElement("button")
-    buttons[text].className = "opButton" //some code after this will change class to numButton for nums
-    buttons[text].textContent = text
+    let button = document.createElement("button")
+    button.className = "opButton" //some code after this will change class to numButton for nums
+    button.textContent = text
 
-    if (parent) {parent.appendChild(buttons[text])}
-    return buttons[text]
+    if (parent) {parent.appendChild(button)}
+    return button
 }
