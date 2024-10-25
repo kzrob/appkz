@@ -15,9 +15,9 @@ const buttonFunctionMap = {
     ["*"]: () => console.log("op"),
     ["/"]: () => console.log("op"),
     ["="]: () => console.log("op"),
-    ["."]: () => newInput(input.value + "."),
-    ["AC"]: () => newInput(input.value.substring(0, input.value.length-1)),
-    ["CE"]: () => newInput(""),
+    ["."]: () => updateInput(input.value + "."),
+    ["AC"]: () => updateInput(input.value.substring(0, input.value.length-1)),
+    ["CE"]: () => updateInput(""),
 }
 
 const keyMap = {
@@ -52,8 +52,8 @@ for (let row=1; row<=buttonMap.length; row++) {
 for (let i=0; i<=9; i++) {
     buttons[i].className = "numButton"
     
-    buttons[i].addEventListener("click", () => newInput(input.value += i))
-    keyMap[i] = () => newInput(input.value + i)
+    buttons[i].addEventListener("click", () => updateInput(input.value += i))
+    keyMap[i] = () => updateInput(input.value + i)
 }
 
 //add keybinds for keymap
@@ -88,7 +88,7 @@ function createButton(parent, text) {
     return button
 }
 
-function newInput(newValue) {
+function updateInput(newValue) {
     //regex: digit.digit or digit
     input.value = newValue
     input.value.match(/(\d+\.\d+)|(\d+)/)
