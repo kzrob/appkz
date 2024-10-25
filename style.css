@@ -5,11 +5,9 @@
     --op-color: rgb(150,200,200);
 }
 
-/*
 * {
     outline: 2px solid red;
 }
-*/
 
 body {
     background-color: var(--bg);
@@ -22,21 +20,27 @@ body {
 
 #calc {
     width: 50vw;
-    height: 60vh;
+    height: 60vw;
     max-width: 90vw;
     max-height: 90vh;
     display: flex;
     flex-direction: column;
 }
 
-.numButton {
+.numButton, .opButton {
     background-color: var(--button-bg);
+    width: 20%; /*this solution for "C" button being square is bad, change it later*/
+    font-size: 100%;
+    margin: 12px;
+    border-radius: 25%;
+}
+
+.numButton {
     border-color: var(--num-color);
     color: var(--num-color)
 }
 
 .opButton {
-    background-color: var(--button-bg);
     border-color: var(--op-color);
     color: var(--op-color)
 }
