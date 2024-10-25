@@ -5,25 +5,40 @@ const buttonMap = [
     ["4", "5", "6", "*"],
     ["1", "2", "3", "-"],
     [".", "0", "=", "+"],
-    ["C"]
+    ["AC", "CE"]
 ]
-const keyMap = {
-    ["Backspace"]: () => input.value = input.value.substring(0, input.value.length-1),
-    ["C"]: () => input.value = "",
-    ["c"]: () => input.value = "",
+
+const buttonFunctionMap = {
+    //digits 0-9 were added with a for loop
+    ["+"]: () => console.log("op"),
+    ["-"]: () => console.log("op"),
+    ["*"]: () => console.log("op"),
+    ["/"]: () => console.log("op"),
+    ["="]: () => console.log("op"),
+    ["."]: () => newInput(input.value + "."),
+    ["AC"]: () => newInput(input.value.substring(0, input.value.length-1)),
+    ["CE"]: () => newInput(""),
 }
+
+const keyMap = {
+    ["Backspace"]: buttonFunctionMap["AC"],
+    ["C"]: buttonFunctionMap["CE"],
+    ["c"]: buttonFunctionMap["CE"],
+    ["X"]: buttonFunctionMap["*"],
+    ["x"]: buttonFunctionMap["*"],
+}
+
+const rows = []     //the "physical" rows, rows[i] = createRow()
+const buttons = {}  //the "physical" buttons, buttons["str"] = createButton()
 
 //create the input row
 const input = document.createElement("input")
 input.className = "inputBox"
 input.readOnly = "true"
-
-const rows = []
-rows["input"] = createRow(calc)
-rows["input"].appendChild(input)
+rows[0] = createRow(calc)
+rows[0].appendChild(input)
 
 //create all the buttons
-const buttons = []
 for (let row=1; row<=buttonMap.length; row++) {
     rows[row] = createRow(calc)
     
@@ -37,8 +52,8 @@ for (let row=1; row<=buttonMap.length; row++) {
 for (let i=0; i<=9; i++) {
     buttons[i].className = "numButton"
     
-    buttons[i].addEventListener("click", () => input.value += i)
-    keyMap[i] = () => input.value += i
+    buttons[i].addEventListener("click", () => newInput(input.value += i))
+    keyMap[i] = () => newInput(input.value + i)
 }
 
 //add keybinds for keymap
@@ -46,6 +61,13 @@ document.addEventListener("keydown", (key) => {
     if (keyMap[key.key]) {
         keyMap[key.key]()
     }
+})
+
+//add click functions for buttonFunctionMap
+buttonMap.forEach((row) => {
+    row.forEach((buttonString) => {
+        buttons[buttonString].addEventListener("click", buttonFunctionMap[buttonString])
+    })
 })
 
 //FUNCTIONS
@@ -56,6 +78,7 @@ function createRow(parent) {
     if (parent) {parent.appendChild(div)}
     return div
 }
+
 function createButton(parent, text) {
     let button = document.createElement("button")
     button.className = "opButton" //some code after this will change class to numButton for nums
@@ -63,4 +86,10 @@ function createButton(parent, text) {
 
     if (parent) {parent.appendChild(button)}
     return button
+}
+
+function newInput(newValue) {
+    //regex: digit.digit or digit
+    input.value = newValue
+    input.value.match(/(\d+\.\d+)|(\d+)/)
 }
