@@ -9,26 +9,9 @@ const buttonMap = [
     ["C"]
 ]
 const keyMap = {
-    ["Backspace"]: () => {
-        input.value = input.value.substring(0, input.value.length-1)
-    }
-}
-
-function createRow(parent) {
-    let div = document.createElement("div")
-    div.className = "rows"
-    
-    if (parent) {parent.appendChild(div)}
-    return div
-}
-
-function createButton(parent, text) {
-    buttons[text] = document.createElement("button")
-    buttons[text].className = "opButton" //some code after this will change class to numButton for nums
-    buttons[text].textContent = text
-
-    if (parent) {parent.appendChild(buttons[text])}
-    return buttons[text]
+    ["Backspace"]: () => input.value = input.value.substring(0, input.value.length-1),
+    ["C"]: () => input.value = "",
+    ["c"]: () => input.value = "",
 }
 
 //create the input row
@@ -37,8 +20,8 @@ input.className = "inputBox"
 input.readOnly = "true"
 
 const row = []
-row["text"] = createRow(calc)
-row["text"].appendChild(input)
+row["input"] = createRow(calc)
+row["input"].appendChild(input)
 
 //create all the buttons
 for (let i=1; i<=buttonMap.length; i++) {
@@ -51,10 +34,10 @@ for (let i=1; i<=buttonMap.length; i++) {
 
 //style and add functions to numerical buttons
 for (let i=0; i<=9; i++) {
-    keyMap[i] = ()=>{input.value += i}
-
     buttons[i].className = "numButton"
-    buttons[i].addEventListener("click", ()=>{input.value += i})
+    
+    buttons[i].addEventListener("click", () => input.value += i)
+    keyMap[i] = () => input.value += i
 }
 
 //add keybinds for keymap
@@ -63,3 +46,20 @@ document.addEventListener("keydown", (key) => {
         keyMap[key.key]()
     }
 })
+
+//FUNCTIONS
+function createRow(parent) {
+    let div = document.createElement("div")
+    div.className = "rows"
+    
+    if (parent) {parent.appendChild(div)}
+    return div
+}
+function createButton(parent, text) {
+    buttons[text] = document.createElement("button")
+    buttons[text].className = "opButton" //some code after this will change class to numButton for nums
+    buttons[text].textContent = text
+
+    if (parent) {parent.appendChild(buttons[text])}
+    return buttons[text]
+}
