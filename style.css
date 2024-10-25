@@ -4,11 +4,11 @@
     --num-color: rgb(100,100,200);
     --op-color: rgb(150,200,200);
 }
-
+/*
 * {
     outline: 2px solid red;
 }
-
+*/
 body {
     background-color: var(--bg);
     height: 100vh;
@@ -27,12 +27,35 @@ body {
     flex-direction: column;
 }
 
+.rows {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    flex: 1;
+}
+
+.inputBox {
+    background-color: rgb(50,50,50);
+    color: rgb(255,255,255);
+    text-align: right;
+    font-size: 60px;
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+}
+
 .numButton, .opButton {
     background-color: var(--button-bg);
     width: 20%; /*this solution for "C" button being square is bad, change it later*/
     font-size: 100%;
     margin: 12px;
     border-radius: 25%;
+
+    transition: background-color 100ms ease-in;
+}
+
+.numButton:hover, .opButton:hover {
+    background-color: var(--bg)
 }
 
 .numButton {

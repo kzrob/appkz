@@ -16,10 +16,7 @@ const keyMap = {
 
 function createRow(parent) {
     let div = document.createElement("div")
-    div.style.display = "flex"
-    div.style.flexDirection = "row"
-    div.style.justifyContent = "left"
-    div.style.flex = 1
+    div.className = "rows"
     
     if (parent) {parent.appendChild(div)}
     return div
@@ -36,14 +33,8 @@ function createButton(parent, text) {
 
 //create the input row
 const input = document.createElement("input")
+input.className = "inputBox"
 input.readOnly = "true"
-input.style.backgroundColor = "rgb(50,50,50)"
-input.style.color = "rgb(255,255,255)"
-input.style.textAlign = "right"
-input.style.fontSize = "60px"
-input.style.width = "100%"
-input.style.height = "100%"
-input.style.borderRadius = "24px"
 
 const row = []
 row["text"] = createRow(calc)
@@ -69,6 +60,6 @@ for (let i=0; i<=9; i++) {
 //add keybinds for keymap
 document.addEventListener("keydown", (key) => {
     if (keyMap[key.key]) {
-        keyMap[key.key]();
+        keyMap[key.key]()
     }
 })
