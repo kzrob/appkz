@@ -90,6 +90,6 @@ function createButton(parent, text) {
 
 function updateInput(newValue) {
     //regex: digit.digit or digit
-    input.value = newValue
-    input.value.match(/(\d+\.\d+)|(\d+)/)
+    input.value = newValue.match(/(\d*\.?\d+|[+\-*/])/g)
+    //input.value = newValue.match(/(\d+\.\d+)|(\d+)/)
 }
