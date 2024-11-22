@@ -34,7 +34,7 @@ const buttons = {}  //the "physical" buttons, buttons["str"] = createButton()
 //create the input row
 const input = document.createElement("input")
 input.className = "inputBox"
-input.readOnly = "true"
+input.readOnly = true
 rows[0] = createRow(calc)
 rows[0].appendChild(input)
 
