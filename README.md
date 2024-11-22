@@ -1,3 +1,4 @@
-# Project: Calculator
-The Odin Project - Foundations Course
+# The Odin Project
 www.theodinproject.com
+
+Learning web development
