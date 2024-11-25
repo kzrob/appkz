@@ -1,6 +1,6 @@
 def main()
     # Caesar Cipher Project
-    puts caesar_cipher("What a string!", 5)
+    puts(caesar_cipher("What a string!", 5))
         #=> "Bmfy f xywnsl!"
 
 
@@ -19,25 +19,25 @@ def main()
     bubble_sort()
 end
 
-$lowAlphabet = [*('a'..'z')]
-$capAlphabet = [*('A'..'Z')]
-$Alphabet = $lowAlphabet + $capAlphabet
+LOWS = [*('a'..'z')]
+CAPS = [*('A'..'Z')]
+ALPHABET = LOWS + CAPS
 
 def caesar_cipher(string = "", shift = 0)
     @chars = string.split("")
     
     @chars.each_with_index do |char, index|
-        @low = $lowAlphabet.find_index(char)
-        @cap = $capAlphabet.find_index(char)
+        @low = LOWS.find_index(char)
+        @cap = CAPS.find_index(char)
 
         if @low != nil then
-            @low = (@low + shift) % $lowAlphabet.length
-            @chars[index] = $lowAlphabet[@low]
+            @low = (@low + shift) % LOWS.length
+            @chars[index] = LOWS[@low]
         end
         if @cap != nil then
-            @cap = (@cap + shift) % $capAlphabet.length
-            @chars[index] = $capAlphabet[@cap]
-        end 
+            @cap = (@cap + shift) % CAPS.length
+            @chars[index] = CAPS[@cap]
+        end
     end
 
     return @chars.join
@@ -47,11 +47,16 @@ def substrings(string = "", dictionary = {})
     @counts = {}
 
     @words = string.split(" ")
+
+    print(@words)
+    puts()
+
     @words.map do |word|
-        word.select { |char| $Alphabet.include?(char) }
+        word.chars.select { |char| ALPHABET.include?(char) }
     end
     
-    print @words
+    print(@words)
+    puts()
 end
 
 def stock_picker()
