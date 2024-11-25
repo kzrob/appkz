@@ -1,0 +1,14 @@
+:root {
+    --dark: #1F2937;
+    --white: #F9FAF8;
+    --light: #E5E7EB;
+    --blue: #3882F6;
+}
+
+.header {
+    background-color: var(--dark);
+    top: 1;
+    right: 1;
+    margin: 0px;
+    width: 100vw;
+}
