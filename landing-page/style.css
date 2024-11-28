@@ -20,9 +20,16 @@ body {
     padding-right: 10vw;
 }
 
-.noLinkFormat a {
-    text-decoration: none;
-    color: inherit;
+.linkFormat {
+    & a {
+        text-decoration: none;
+        color: inherit;
+        transition: color 0.25s ease;
+    }
+    
+    & a:hover {
+        color: var(--blue);
+    }
 }
 
 .header {
