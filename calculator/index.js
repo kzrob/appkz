@@ -15,9 +15,9 @@ const buttonFunctionMap = {
     ["*"]: () => console.log("op"),
     ["/"]: () => console.log("op"),
     ["="]: () => console.log("op"),
-    ["."]: () => updateInput(input.value + "."),
-    ["AC"]: () => updateInput(input.value.substring(0, input.value.length-1)),
-    ["CE"]: () => updateInput(""),
+    ["."]: () => input.push("."),
+    ["AC"]: () => input.pop(),
+    ["CE"]: () => input.splice(0, input.length), //use splice so that we can listen to the event
 }
 
 const keyMap = {
@@ -28,15 +28,16 @@ const keyMap = {
     ["x"]: buttonFunctionMap["*"],
 }
 
+const input = []
 const rows = []     //the "physical" rows, rows[i] = createRow()
 const buttons = {}  //the "physical" buttons, buttons["str"] = createButton()
 
 //create the input row
-const input = document.createElement("input")
-input.className = "inputBox"
-input.readOnly = true
+const inputBox = document.createElement("input")
+inputBox.className = "inputBox"
+inputBox.readOnly = true
 rows[0] = createRow(calc)
-rows[0].appendChild(input)
+rows[0].appendChild(inputBox)
 
 //create all the buttons
 for (let row=1; row<=buttonMap.length; row++) {
@@ -52,14 +53,14 @@ for (let row=1; row<=buttonMap.length; row++) {
 for (let i=0; i<=9; i++) {
     buttons[i].className = "numButton"
     
-    buttons[i].addEventListener("click", () => updateInput(input.value += i))
-    keyMap[i] = () => updateInput(input.value + i)
+    buttons[i].addEventListener("click", () => updateInput(inputBox.value += i))
+    keyMap[i] = () => input.push(i)
 }
 
 //add keybinds for keymap
-document.addEventListener("keydown", (key) => {
-    if (keyMap[key.key]) {
-        keyMap[key.key]()
+document.addEventListener("keydown", (event) => {
+    if (keyMap[event.key]) {
+        keyMap[event.key]()
     }
 })
 
@@ -88,8 +89,37 @@ function createButton(parent, text) {
     return button
 }
 
-function updateInput(newValue) {
-    //regex: digit.digit or digit
-    input.value = newValue.match(/(\d*\.?\d+|[+\-*/])/g)
-    //input.value = newValue.match(/(\d+\.\d+)|(\d+)/)
+function combineTerms() {
+    for (let i=0; i<input.length; i++) {
+        let v = input[i]
+
+        //find format where: (a^b)
+        let bundledTerm = (input[i-2] == "(") && (input[i+2] == ")")
+        
+        //exp, mult, div
+        if (v == "^" || v == "*" || v == "/") {
+            input.splice(i-2, 0, "(")
+            input.splice(i+2, 0, ")")
+        }
+    }
+}
+
+//update input box upon editing [input] array
+function updateInput() {
+    inputBox.value = input.join('')
+}
+
+input.push = function() {
+    Array.prototype.push.apply(this, arguments)
+    updateInput()
+}
+
+input.pop = function() {
+    Array.prototype.pop.apply(this, arguments)
+    updateInput()
+}
+
+input.splice = function() {
+    Array.prototype.splice.apply(this, arguments)
+    updateInput()
 }
