@@ -15,6 +15,11 @@ body {
     font-family: Roboto;
 }
 
+.main {
+    padding-left: 10vw;
+    padding-right: 10vw;
+}
+
 .noLinkFormat a {
     text-decoration: none;
     color: inherit;
@@ -23,11 +28,13 @@ body {
 .header {
     min-height: fit-content;
     display: flex;
-    padding: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     background-color: var(--dark);
 
     & .logo {
         flex: 1;
+        text-align: left;
         color: var(--white);
         font-size: 24px;
         font-weight: 900;
@@ -35,17 +42,21 @@ body {
 
     & .links {
         flex: 1;
-        float: right;
-        gap: 1rem;
+        text-align: right;
         color: var(--light);
         font-size: 18px;
+
+        & a {
+            padding: 0rem 0.5rem 0rem 0.5rem;
+        }
     }
 }
 
 .hero {
     min-height: fit-content;
     height: 20rem;
-    padding: 5rem;
+    padding-top: 4rem;
+    padding-bottom: 5rem;
     display: flex;
     background-color: var(--dark);
     
@@ -90,4 +101,14 @@ body {
             color: var(--white);
         }
     }
+}
+
+.footer {
+    background-color: var(--dark);
+    color: var(--light);
+    padding: 2rem 0rem 2rem 0rem;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
 }
