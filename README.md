@@ -1,8 +1,5 @@
-# The Odin Project
-Learning web development  
-www.theodinproject.com
+# Web Development
+Learning web development by creating random apps  
 
-# Sites
-Landing Page: https://appkz.github.io/odin-project/landing-page/  
-Sketchpad: https://appkz.github.io/odin-project/sketchpad/  
-Calculator: https://appkz.github.io/odin-project/calculator/
+# Cool resources
+www.theodinproject.com
