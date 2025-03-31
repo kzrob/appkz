@@ -1,6 +1,3 @@
-document.title = "Sketchpad"
-document.characterSet = "UTF-8"
-
 var black = "#000000"
 var white = "#FFFFFF"
 var accent = "#0A81D1"

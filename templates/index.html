@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>appkz</title>
+        <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+        <link rel="stylesheet" href="/static/index.css">
+    </head>
+
+    <body>
+        <div class="title">
+            <h1>appkz</h1>
+            <p>fun apps and games</p>
+        </div>
+
+        <div class="container">
+            {% for article in articles %}
+                <a href={{article.url}}>
+                    <div class="card">
+                        <h1>{{article.title}}</h1>
+                        <p>{{article.description}}</p>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </body>
+</html>

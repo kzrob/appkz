@@ -1,0 +1,17 @@
+[
+	{
+		"title": "Calculator",
+		"description": "A simple calculator app",
+		"url": "/calculator"
+	},
+	{
+		"title": "Sketchpad",
+		"description": "A simple sketchpad",
+		"url": "/sketchpad"
+	},
+	{
+		"title": "History Analyzer",
+		"description": "An app that analyzes your browser history file",
+		"url": "/upload"
+	}
+]
